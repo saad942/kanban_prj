@@ -1,0 +1,11 @@
+/* home.css */
+.cnt {
+    background-color:rgba(204, 190, 218, 0.548);
+  
+    height: 500px; /* Set the height according to your design */
+}
+
+.card{
+    margin-top: 250px;
+    text-align: center;
+}
