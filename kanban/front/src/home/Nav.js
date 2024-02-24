@@ -5,28 +5,31 @@ import './Nav.css';
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user-info')) || {};
-  const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 0;
-      setScrolled(isScrolled);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    const storedUser = localStorage.getItem('user-info');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
   }, []);
 
+  const handleScroll = () => {
+    const isScrolled = window.scrollY > 0;
+    setScrolled(isScrolled);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const [scrolled, setScrolled] = useState(false);
   const navbarClass = `navbar ${scrolled ? 'scrolled' : ''}`;
 
   return (
     <div className={navbarClass}>
-      <div className="navbar-container">
+      <div className="navbar">
         <Link to="/">
           <img
             src="./images/logo.png"
@@ -34,7 +37,7 @@ const NavBar = () => {
             style={{ maxWidth: '100px' }}
           />
         </Link>
-        <div className="ul">
+        <div className="nav-links">
           <ul>
             <li>
               <Link to="/about">About</Link>
@@ -45,14 +48,11 @@ const NavBar = () => {
             <li>
               <Link to="/cart">Cart</Link>
             </li>
+            <li>
+              <Link to="/cart">Join-us</Link>
+            </li>
           </ul>
         </div>
-        <button
-          className="button"
-          onClick={() => navigate(user.isLoggedIn ? '/home' : '/')}
-        >
-          Task
-        </button>
       </div>
     </div>
   );

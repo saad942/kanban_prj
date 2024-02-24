@@ -1,11 +1,30 @@
-/* home.css */
-.cnt {
-    background-color:rgba(204, 190, 218, 0.548);
-  
-    height: 500px; /* Set the height according to your design */
+
+
+.card {
+    margin-top: 250px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    animation: cardMovement 1s infinite alternate ease-in-out;
 }
 
-.card{
-    margin-top: 250px;
-    text-align: center;
+@keyframes cardMovement {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-10px); /* Adjusted movement to be faster */
+    }
 }
+
+.card h2 {
+    font-size: 24px;
+    color: #554d4d;
+}
+
+.card p {
+    font-size: 16px;
+    color: #666;
+}
+

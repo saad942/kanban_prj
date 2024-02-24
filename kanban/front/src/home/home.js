@@ -35,21 +35,21 @@ function Home() {
                 <div ><Signup/></div>
                 
                 <div style={{
-                    marginTop:'-150px',
-                    marginLeft: '850px',
+                    marginTop:'-180px',
+                    marginLeft: '750px',
                     height: '550px',
                     width: '500px',
-                    borderRadius: '50px', // Add a unit (e.g., pixels)
-                    overflow: 'hidden' // Ensure the image is within the rounded border
+                    borderRadius: '50px', 
+                    overflow: 'hidden' 
                 }}>
-                    <img
+                    <img className="Mimag"
                         src="./images/back.jpeg"
                         alt=""
                         style={{
                             
                             width: '100%',
                             height: '100%',
-                            objectFit: 'cover' // Maintain image aspect ratio within the container
+                            objectFit: 'cover' 
                         }}
                     />
                 </div>
@@ -101,10 +101,10 @@ function Home() {
         </section>
         <section id="3">
         <Slider {...settings}   style={{
-        width: '50%', // Set the width as a percentage or any other valid CSS value
-        margin: 'auto', // Center the slider
+        width: '50%', 
+        margin: 'auto', 
         height: '250px',
-        marginTop:'200px' // Set the height as a fixed value or any other valid CSS value
+        marginTop:'200px' 
     }}>
     {data.map((d, index) => (
         <div key={index} >
