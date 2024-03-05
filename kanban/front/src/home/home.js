@@ -7,7 +7,11 @@ import './home.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useNavigate } from "react-router-dom";
 function Home() {
+    let user = JSON.parse(localStorage.getItem('user-info'));
+    const navigate=useNavigate()
+
     const data =[
         {
             img:'./images/1.png'
@@ -31,6 +35,8 @@ function Home() {
         <div >
             <NAV />
             <section id="1">
+                {!user?(
+                    
             <div className="cnt" style={{marginTop:'150px'}}>
                 <div ><Signup/></div>
                 
@@ -54,6 +60,21 @@ function Home() {
                     />
                 </div>
             </div>
+            ):(
+               <div className="afterlog">
+                <div className="button-container">
+              <button
+                onClick={() => navigate('/product')}
+                style={{ backgroundColor: 'rgb(134, 160, 172)',    width: '250px',            }}
+                className="btn btn-primary btn-sm logout-button border-0"
+              >
+                Start Here
+              </button>
+              
+            </div>
+
+               </div>
+            )}
             </section>
             <section id="2">
             <div className="container ">

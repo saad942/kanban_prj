@@ -5,18 +5,16 @@ import './Nav.css';
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user-info');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  let user = JSON.parse(localStorage.getItem('user-info'));
 
   const handleScroll = () => {
     const isScrolled = window.scrollY > 0;
     setScrolled(isScrolled);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('user-info');
+    navigate('/');
   };
 
   useEffect(() => {
@@ -33,7 +31,7 @@ const NavBar = () => {
         <Link to="/">
           <img
             src="./images/logo.png"
-            alt="Logo"
+            alt="Company Logo"
             style={{ maxWidth: '100px' }}
           />
         </Link>
@@ -45,12 +43,22 @@ const NavBar = () => {
             <li>
               <Link to="/offer">Offer</Link>
             </li>
-            <li>
-              <Link to="/cart">Cart</Link>
-            </li>
-            <li>
-              <Link to="/cart">Join-us</Link>
-            </li>
+            {!user ? (
+              <li>
+                <Link to="/cart">Join-us</Link>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link to="/home">Cart</Link>
+                </li>
+                <li>
+                  <button onClick={handleLogout} className="btn btn-primary">
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

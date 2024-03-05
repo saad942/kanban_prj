@@ -3,16 +3,21 @@ import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
+import Left from './left';
 
 const apiUrl = 'http://localhost:3002/api';
 
-
 function App() {
   const [tables, setTables] = useState([]);
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('user-info'));
 
   useEffect(() => {
-    fetchTables();
-  }, []);
+    if (!user) {
+      navigate('/');
+      fetchTables();
+    }
+  }, [user, navigate]);
 
   const fetchTables = async () => {
     try {
@@ -114,19 +119,21 @@ function App() {
       moveTask(table.id, taskId, sourceColumnId, destinationColumnId);
     }
   };
-  const navigate= useNavigate();
-   const handleLogout = () => {
+
+  const handleLogout = () => {
     localStorage.removeItem('user-info');
-    navigate('/')
+    navigate('/');
   }; 
 
   return (
-    <div className="container">
+    <div>    <Left />
+    <div className="container">    
+
       <button onClick={addTable} className="btn btn-primary">
         Add Table
       </button>
       <button onClick={handleLogout} className="btn btn-primary">
-        Loguout
+        Logout
       </button>
       {tables.map((table) => (
         <div key={table.id} className="mt-4">
@@ -186,11 +193,9 @@ function App() {
           </DragDropContext>
         </div>
       ))}
+    </div></div>
 
-    </div>
-     
   );
 }
 
 export default App;
-

@@ -8,7 +8,27 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     animation: cardMovement 1s infinite alternate ease-in-out;
 }
-
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    height: 40px;
+    font-size: 50px;
+    margin-right: 500px;
+  }
+.afterlog{
+    margin-top: 119px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(0deg, rgba(102, 101, 101, 0.8), rgba(88, 82, 82, 0.8)),
+      url(/public/images/kn.jpg);
+    background-size: cover;
+    border-radius: 15px;
+    height: 750px;
+    width: 100%;
+    border: none;
+}
 @keyframes cardMovement {
     from {
         transform: translateY(0);
