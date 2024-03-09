@@ -13,13 +13,15 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: '', 
+  password: '',
   database: 'kanban'
 });
 
 pool.on('error', (err) => {
   console.error('Error connecting to database:', err);
 });
+
+// Endpoint for user login or signup
 app.post('/login-or-signup', (req, res) => {
   const { email } = req.body;
   if (!email) {
@@ -52,8 +54,63 @@ app.post('/login-or-signup', (req, res) => {
   });
 });
 
+// Endpoint for creating a list
+app.post('/createList', (req, res) => {
+  const { name } = req.body;
+  if (!name) {
+    return res.status(400).json({ error: 'List name is required' });
+  }
+
+  const sql = 'INSERT INTO lists (name) VALUES (?)';
+  pool.query(sql, [name], (err, result) => {
+    if (err) {
+      console.error('Error:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    return res.status(201).json({ message: 'List created successfully' });
+  });
+});
 
 
+app.get('/list', (req, res) => {
+  const sql = 'SELECT name FROM lists'; // Select only the 'name' column from the 'items' table
+  pool.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error fetching data:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    return res.status(200).json({ message: 'success', names: result }); // Sending only the names
+  });
+});
+
+//table
+app.post('/createL', (req, res) => {
+  const { name } = req.body;
+  if (!name) {
+    return res.status(400).json({ error: 'List name is required' });
+  }
+
+  const sql = 'INSERT INTO tables (name) VALUES (?)';
+  pool.query(sql, [name], (err, result) => {
+    if (err) {
+      console.error('Error:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    return res.status(201).json({ message: 'List created successfully' });
+  });
+});
+
+
+app.get('/listTb', (req, res) => {
+  const sql = 'SELECT name FROM tables'; 
+  pool.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error fetching data:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    return res.status(200).json({ message: 'success', names: result }); 
+  });
+});
 
 
 app.listen(port, () => {
