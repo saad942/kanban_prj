@@ -3,6 +3,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mysql = require('mysql');
 
+
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ error: 'Unauthorized' });
+};
+
+
 const app = express();
 const port = 3002;
 
@@ -47,7 +56,7 @@ app.post('/login-or-signup', (req, res) => {
           console.error('Error:', err);
           return res.status(500).json({ error: 'Internal Server Error' });
         }
-        const userInfo = { id: result.insertId, email };
+        const userInfo = { id: results[0].id, email: results[0].email, };
         return res.status(201).json({ message: 'User created and logged in successfully', userInfo });
       });
     }

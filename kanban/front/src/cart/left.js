@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Left from './left';
-import './cart.css';
+import './left.css'; // Import your CSS file
 
 function App() {
   const [inputValue, setInputValue] = useState('');
@@ -46,8 +45,18 @@ function App() {
 
   return (
     <div>
-      <Left />
-      <div className="container">
+      <div className="left-sidebar">
+
+        <div className="cart">
+          {names.length === 0 ? (
+            <p>No items in cart</p>
+          ) : (
+            names.map((item, index) => (
+              <div key={index}>{item}</div>
+            ))
+          )}
+        </div>
+        
         <div className='input'>
           <input
             type='text'
@@ -57,15 +66,9 @@ function App() {
           />
           <button onClick={add}>Add to Cart</button>
         </div>
-        <div className="cart">
-  {names.length === 0 ? (
-    <p>No items in cart</p>
-  ) : (
-    names.map((item, index) => (
-      <div key={index} >{item}</div>
-    ))
-  )}
-</div>
+
+
+        
       </div>
     </div>
   );

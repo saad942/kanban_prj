@@ -5,6 +5,8 @@ import Left from './left';
 import './cart.css';
 
 function App() {
+  const user = JSON.parse(localStorage.getItem('user-info'));
+
   const [inputValue, setInputValue] = useState('');
   const [names, setNames] = useState([]);
 
@@ -22,7 +24,7 @@ function App() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [user.id]);
 
   const add = (e) => {
     e.preventDefault();

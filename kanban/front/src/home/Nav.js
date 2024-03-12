@@ -13,7 +13,7 @@ const NavBar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('user-info');
+    localStorage.clear('user-info');
     navigate('/');
   };
 
@@ -36,30 +36,24 @@ const NavBar = () => {
           />
         </Link>
         <div className="nav-links">
-          <ul>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/offer">Offer</Link>
-            </li>
-            {!user ? (
-              <li>
-                <Link to="/cart">Join-us</Link>
-              </li>
-            ) : (
+        <span className="nav-link" onClick={() => navigate('/')}>
+          Home
+        </span>
+        <span className="nav-link" onClick={() => navigate('/')}>
+          About
+        </span>
+            {user && (
+             
               <>
-                <li>
-                  <Link to="/home">Cart</Link>
-                </li>
-                <li>
+                <span className="nav-link" onClick={() => navigate('/cart')}>
+                cart
+               </span>
                   <button onClick={handleLogout} className="btn btn-primary">
                     Logout
                   </button>
-                </li>
               </>
             )}
-          </ul>
+          
         </div>
       </div>
     </div>
