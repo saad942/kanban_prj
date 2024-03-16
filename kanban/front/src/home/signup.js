@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function LoginOrSignup() {
-  let user = JSON.parse(localStorage.getItem('user-info'));
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -29,7 +28,7 @@ function LoginOrSignup() {
       if (response.data.message === 'Success') {
         const userInfo = response.data.userInfo;
         localStorage.setItem('user-info', JSON.stringify(userInfo));
-        navigate('/');
+        navigate('/cart');
       } else {
         setError('Login failed');
       }
@@ -45,12 +44,11 @@ function LoginOrSignup() {
   return (
     <div style={{ marginLeft: '120px' }}>
       <form onSubmit={handleSubmit}>
-        {!user ? (
-          <>
-        <h4 style={{ fontSize: '40px' }}>
-          Task brings all your <br/>tasks, teammates, and<br/> tools together
-        </h4>
         
+            <h4 style={{ fontSize: '40px' }}>
+              Task brings all your <br />tasks, teammates, and<br /> tools together
+            </h4>
+
             <label style={{ marginTop: '20px', display: 'block', fontSize: '18px' }}>Email:</label>
             <input
               type="text"
@@ -64,7 +62,7 @@ function LoginOrSignup() {
                 marginBottom: '20px',
                 width: '300px'
               }}
-            /><br/>
+            /><br />
             <button
               type="submit"
               disabled={loading}
@@ -80,9 +78,7 @@ function LoginOrSignup() {
             >
               {loading ? 'Loading...' : 'Enter to create task'}
             </button>
-          </>
-        ) : (
-<></>        )}
+          
       </form>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}

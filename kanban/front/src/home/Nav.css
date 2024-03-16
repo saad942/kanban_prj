@@ -7,41 +7,20 @@
   align-items: center;
   padding: 10px;
   position: fixed;
+
   width: 100%;
   top: 0;
-  z-index: 1000;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.navbar.scrolled {
-  
-  background-color: azure;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 .nav-links {
-  margin-left: auto;
-}
-
-.nav-links ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   display: flex;
+  gap: 10px;
 }
-
-.nav-links li {
-  margin-right: 20px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: black;
-  font-size: 20px;
-}
-
-
-
 .navbar img {
   max-width: 100px;
 }

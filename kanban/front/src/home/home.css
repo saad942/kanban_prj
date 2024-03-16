@@ -16,27 +16,8 @@
     font-size: 50px;
     margin-right: 500px;
   }
-.afterlog{
-    margin-top: 119px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    background: linear-gradient(0deg, rgba(102, 101, 101, 0.8), rgba(88, 82, 82, 0.8)),
-      url(/public/images/kn.jpg);
-    background-size: cover;
-    border-radius: 15px;
-    height: 750px;
-    width: 100%;
-    border: none;
-}
-@keyframes cardMovement {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-10px); /* Adjusted movement to be faster */
-    }
-}
+
+
 
 .card h2 {
     font-size: 24px;

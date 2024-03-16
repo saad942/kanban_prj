@@ -7,34 +7,23 @@ const NavBar = () => {
   const navigate = useNavigate();
   let user = JSON.parse(localStorage.getItem('user-info'));
 
-  const handleScroll = () => {
-    const isScrolled = window.scrollY > 0;
-    setScrolled(isScrolled);
-  };
-
   const handleLogout = () => {
     localStorage.clear('user-info');
     navigate('/');
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const [scrolled, setScrolled] = useState(false);
-  const navbarClass = `navbar ${scrolled ? 'scrolled' : ''}`;
 
   return (
-    <div className={navbarClass}>
       <div className="navbar">
+        <div>
         <Link to="/">
           <img
             src="./images/logo.png"
             alt="Company Logo"
-            style={{ maxWidth: '100px' }}
+            style={{ maxWidth: '80px' }}
           />
         </Link>
+        </div>
         <div className="nav-links">
         <span className="nav-link" onClick={() => navigate('/')}>
           Home
@@ -56,7 +45,6 @@ const NavBar = () => {
           
         </div>
       </div>
-    </div>
   );
 };
 
